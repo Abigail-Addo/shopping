@@ -2,15 +2,16 @@
 // localStorage.removeItem('customer_id')
 
 window.addEventListener('load', async () => {
+    console.log('script.js is working');
 
+    // Fetch product data and create HTML elements
     const result = await fetch('http://localhost:7070/shop/v1/products');
     const response = await result.json();
     console.log(response);
 
-
     const row = document.querySelector('.row');
-    let contents = '';
 
+    let contents = '';
     response.forEach(product => {
         contents += `
             <div class="col">
@@ -35,18 +36,23 @@ window.addEventListener('load', async () => {
                 </div>
             </div>
         </div>
-            `;
+        `;
         row.innerHTML = contents;
     });
 
-    //add to cart
-    const addToCartBtn = document.querySelectorAll('.addCart');
 
+
+
+    // Add event listeners to the "Add to Cart" buttons
+    const addToCartBtn = document.querySelectorAll('.addCart');
     addToCartBtn.forEach(btn => {
+
+        // btn.style.border = '1px solid black';
 
         btn.addEventListener('click', async (e) => {
             e.preventDefault();
-            //code 
+
+            // Your "Add to Cart" button click logic here
             let product_id = btn.id;
             console.log('product id')
             console.log(product_id)
@@ -61,7 +67,7 @@ window.addEventListener('load', async () => {
             console.log(priceVal)
 
 
-            alert('attempting to add new item to shopping cart' + product_id)
+            // alert('attempting to add new item to shopping cart' + product_id)
 
             const newOrder = await fetch('http://localhost:7070/shop/v1/order', {
                 method: 'POST',
@@ -70,21 +76,22 @@ window.addEventListener('load', async () => {
                 },
                 body: JSON.stringify({
                     product_id: Number(product_id),
-                    customer_id: Number(customer_id),
-                    price: Number(priceVal)
+                    customer_id: Number(customer_id)
                 })
             })
-
-            console.log(typeof(+product_id));
-            console.log(typeof(+customer_id));
-            console.log(typeof(+priceVal));
 
             if (newOrder.status == 200 || newOrder.status == 201) {
                 let res = await newOrder.json();
                 console.log(res)
             }
-        })
+
+            window.location.href = './index.html';
+
+        });
     });
+
+
+
 
 
 });
@@ -166,6 +173,13 @@ const cartNumber = async (customer_token) => {
 
         });
 
+
+
+        if (rs.status == 409) {
+            alert('Product has been added to cart already');
+
+            return;
+        }
         if (rs.status == 200) {
             let orders = await rs.json();
             console.log(orders)
@@ -176,14 +190,17 @@ const cartNumber = async (customer_token) => {
 
             console.log(orderCount)
 
-            const cList = document.querySelector('.cart-number')
+            const cList = document.querySelector('#cart-number')
             cList.innerHTML = orderCount;
         }
+
+
 
     }
 
     // }, 1500);
 }
+
 
 
 // setInterval(() => {

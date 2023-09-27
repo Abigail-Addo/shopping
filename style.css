@@ -81,14 +81,6 @@ div.card-body i.fa {
     right: 10%;
 }
 
-/* .carousel-control-prev {
-    color: #000;
- }
-
- .carousel-control-next {
-    color: #000;
-
- } */
 div.card-text {
     width: 80%;
     /* border: 2px solid black; */
@@ -104,8 +96,6 @@ div.card-text p.fw-bold {
 
 .textTruncate {
     text-overflow: ellipsis;
-
-    /* Required for text-overflow to do anything */
     white-space: nowrap;
     overflow: hidden;
 }
@@ -115,8 +105,9 @@ div.card-text p.fw-bold {
     /* border: 2px solid yellow; */
     margin: auto;
 }
+
 .lastChild {
-margin-bottom: 1rem;
+    margin-bottom: 1rem;
 }
 
 .div {
@@ -128,6 +119,7 @@ margin-bottom: 1rem;
 .div .bi {
     cursor: pointer;
 }
+
 .div div {
     display: flex;
     justify-content: center;
@@ -137,6 +129,7 @@ margin-bottom: 1rem;
 section div.album {
     margin-top: 1rem;
 }
+
 div.side-bar {
     width: 100%;
     height: 100%;
@@ -146,17 +139,20 @@ div.side-bar {
     align-items: center;
 
 }
+
 div.increment {
-    /* padding: 0.5rem 0.5rem; */
-    /* background-color: gray; */
-    color: red;
+    padding: 0.3rem;
+    /* color: #fff;
+    background-color: gray; */
     font-weight: bold;
     border-radius: 50%;
     position: absolute;
-    top: -15%;
-    left: 19%;
-    font-weight: 1rem;
+    top: 0;
+    right: 10.5%;
+    font-size: 0.8rem;
 }
-ul.shopping {
+
+nav {
     position: relative;
+    border: 2px solid black;
 }
