@@ -45,6 +45,7 @@ window.addEventListener('load', async () => {
 
     // Add event listeners to the "Add to Cart" buttons
     const addToCartBtn = document.querySelectorAll('.addCart');
+
     addToCartBtn.forEach(btn => {
 
         // btn.style.border = '1px solid black';
@@ -57,7 +58,9 @@ window.addEventListener('load', async () => {
             console.log('product id')
             console.log(product_id)
             console.log("customer_id")
+
             let customer_id = localStorage.getItem('customer_id');
+
             console.log(customer_id)
             console.log('product price')
             let mainEL = e.target.parentElement;
@@ -80,6 +83,13 @@ window.addEventListener('load', async () => {
                 })
             })
 
+            if (newOrder.status == 409) {
+                let res = await newOrder.json();
+                alert('Product has already been added to cart');
+        
+                return;
+            }
+
             if (newOrder.status == 200 || newOrder.status == 201) {
                 let res = await newOrder.json();
                 console.log(res)
@@ -98,7 +108,6 @@ window.addEventListener('load', async () => {
 
 //self invoking function 
 const createNewCustomerId = async () => {
-
 
     //get customer token
     let customer_token = localStorage.getItem('customer_token');
@@ -132,6 +141,7 @@ const createNewCustomerId = async () => {
 
 createNewCustomerId();
 
+
 const cartNumber = async (customer_token) => {
     console.log("getting cart items list")
     //get cart items number
@@ -145,6 +155,7 @@ const cartNumber = async (customer_token) => {
             token: customer_token
         })
     })
+
     if (result.status == 200) {
         let response = await result.json();
         console.log(response)
@@ -161,7 +172,6 @@ const cartNumber = async (customer_token) => {
 
 
         //get orders with customer id 
-
         const rs = await fetch('http://localhost:7070/shop/v1/orders-with-customerId', {
             method: 'POST',
             headers: {
@@ -173,13 +183,6 @@ const cartNumber = async (customer_token) => {
 
         });
 
-
-
-        if (rs.status == 409) {
-            alert('Product has been added to cart already');
-
-            return;
-        }
         if (rs.status == 200) {
             let orders = await rs.json();
             console.log(orders)
@@ -198,15 +201,9 @@ const cartNumber = async (customer_token) => {
 
     }
 
-    // }, 1500);
+
 }
-
-
-
-// setInterval(() => {
 
 
 let customerToken = localStorage.getItem('customer_token')
 cartNumber(customerToken);
-
-// }, 2000);
