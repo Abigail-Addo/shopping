@@ -76,3 +76,7 @@ ul li a i {
 .order-container {
     transition: all 0.3s ease;
 }
+.delete {
+    height: 5rem;
+    width: 10rem;
+}

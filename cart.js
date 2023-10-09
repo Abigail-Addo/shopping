@@ -39,17 +39,11 @@ window.addEventListener('load', async () => {
                     <div class="font-size-lg pt-2"> <p class="Itemprice">&cent; ${order.products.price}</p> </div>
                 </div>
             </div>
-            <div class="pt-2 pt-sm-0 pl-sm-3 mx-auto mx-sm-0 text-center text-sm-left"
-                style="max-width: 10rem;">
-                <div class="form-group mb-2">
-                <label for="quantity4">Quantity</label>
-                <input class="form-control form-control-sm" type="number" id="quantity4" value="1">
+            <div class="delete">
+            <button class="btn btn-outline-danger btn-sm btn-block" type="button" id=${order.products.id}>
+            <i class="bi bi-trash"></i>Remove</button>
             </div>
-                <button class="btn btn-outline-secondary btn-sm btn-block mb-2" type="button" class:"update">
-                <i class="bi bi-arrow-clockwise"></i>Update cart</button>
-                <button class="btn btn-outline-danger btn-sm btn-block mb-2" type="button" id=${order.products.id}>
-                    <i class="bi bi-trash"></i>Remove</button>
-            </div>
+               
         </div>
             `
                 cartContainer.innerHTML = item;
@@ -59,9 +53,9 @@ window.addEventListener('load', async () => {
         }
 
     }
+
+
     // total price
-
-
     const totalPrices = document.querySelectorAll('.totalPrice');
     const Itemprices = document.querySelectorAll('.Itemprice');
     console.log(Itemprices);
@@ -90,7 +84,7 @@ window.addEventListener('load', async () => {
 
         // Now, update each totalPrice element with the calculated total
         totalPrices.forEach(totalPrices => {
-            totalPrices.textContent = 'GH' + '\u00A2' + ' ' + totalPrice; 
+            totalPrices.textContent = 'GH' + '\u00A2' + ' ' + totalPrice;
         });
 
 
